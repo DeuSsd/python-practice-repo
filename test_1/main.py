@@ -12,4 +12,4 @@ if __name__ == '__main__':
 
     ]
     for num, line in enumerate(test):
-        print(num, f" - {check_palindeom(line)}", line)
+        print(num, f" - {check_palindeom(line)} - ", line)
