@@ -12,7 +12,7 @@ from collections.abc import Callable
 from typing import List
 
 
-def func(filter: Callable[str, bool], list_for_filtering: List[str]) -> List[str]:
+def filter(filter: Callable[str, bool], list_for_filtering: List[str]) -> List[str]:
     for string in list_for_filtering.copy():
         if filter(string):
             list_for_filtering.remove(string)
@@ -23,16 +23,3 @@ filter_list = [
     lambda line: line.startswith("a"),
     lambda line: len(line) < 5
 ]
-
-if __name__ == '__main__':
-    test_line = [
-        "Text",
-        "Нажал кабан на баклажан",
-        "Привет мир!",
-        "аврора",
-        "atmosphere"
-    ]
-
-    print(test_line)
-    for num, filter in enumerate(filter_list):
-        print(num, f" - {func(filter, test_line.copy())}")
