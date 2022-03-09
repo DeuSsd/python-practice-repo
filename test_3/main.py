@@ -12,24 +12,49 @@ import math
 
 class Figure:
     def __init__(self):
-        self.s = 0.
-        self.p = 0.
+
+        self._s = 0.
+        self._p = 0.
+
+    def __square(self):
+        pass
+
+    def __perimetr(self):
+        pass
+
+    def get_parameters(self):
+        pass
+
+    def get_square(self):
+        self.__square()
+        return self._s
+
+    def get_perimeter(self):
+        self.__perimetr()
+        return self._p
 
     def square_lt(self, other):
-        return self.s < other.s
+        return self._s < other._s
 
     def perimeter_lt(self, other):
-        return self.p < other.p
+        return self._p < other._p
 
 
 class Rectangle(Figure):
     def __init__(self, w: float, h: float):
         super().__init__()
         assert w > 0 and h > 0, "Values expect be positive"
-        self.w = w
-        self.h = h
-        self.p = 2 * (w + h)
-        self.s = w * h
+        self._w = w
+        self._h = h
+
+    def get_parameters(self):
+        return (self._w,self._h)
+
+    def __square(self):
+        self.s = self._w * self._h
+
+    def __perimetr(self):
+        self._p = 2 * (self._w + self._h)
 
 
 class Square(Rectangle):
@@ -42,18 +67,32 @@ class Triangle(Figure):
         super().__init__()
         assert a > 0 and b > 0 and c > 0, "Values expect be positive"
         assert a < b + c and b < a + c and c < a + b, "Wrong sides of a triangle"
-        self.a = a
-        self.b = b
-        self.c = c
-        self.p = a + b + c
-        half_p = self.p/2
-        self.s = math.sqrt(half_p * (half_p- self.a) * (half_p - self.b) * (half_p - self.c))
+        self._a = a
+        self._b = b
+        self._c = c
 
+    def get_parameters(self):
+        return (self._a,self._b,self._c)
+
+    def __square(self):
+        self.__perimetr()
+        half_p = self._p/2
+        self._s = math.sqrt(half_p * (half_p- self._a) * (half_p - self._b) * (half_p - self._c))
+
+    def __perimetr(self):
+        self._p = self._a + self._b + self._c
 
 class Circle(Figure):
     def __init__(self, r: float):
         super().__init__()
         assert r > 0, "Value expect be positive"
-        self.r = r
-        self.p = 2 * self.r * math.pi
-        self.s = math.pi * (self.r ** 2)
+        self._r = r
+
+    def get_parameters(self):
+        return (self._r)
+
+    def __square(self):
+        self.s = math.pi * (self._r ** 2)
+
+    def __perimetr(self):
+        self.p = 2 * self._r * math.pi
