@@ -9,29 +9,25 @@
 """
 import math
 
+from abc import ABC, abstractmethod
 
-class Figure:
+
+class Figure(ABC):
     def __init__(self):
-
         self._s = 0.
         self._p = 0.
 
-    def __square(self):
+    @abstractmethod
+    def get_square(self):
         pass
 
-    def __perimetr(self):
+    @abstractmethod
+    def get_perimeter(self):
         pass
 
+    @abstractmethod
     def get_parameters(self):
         pass
-
-    def get_square(self):
-        self.__square()
-        return self._s
-
-    def get_perimeter(self):
-        self.__perimetr()
-        return self._p
 
     def square_lt(self, other):
         return self._s < other._s
@@ -48,14 +44,15 @@ class Rectangle(Figure):
         self._h = h
 
     def get_parameters(self):
-        return (self._w,self._h)
+        return self._w, self._h
 
-    def __square(self):
+    def get_square(self):
         self.s = self._w * self._h
+        return self._s
 
-    def __perimetr(self):
+    def get_perimeter(self):
         self._p = 2 * (self._w + self._h)
-
+        return self._p
 
 class Square(Rectangle):
     def __init__(self, a: float):
@@ -72,15 +69,16 @@ class Triangle(Figure):
         self._c = c
 
     def get_parameters(self):
-        return (self._a,self._b,self._c)
+        return self._a, self._b, self._c
 
-    def __square(self):
-        self.__perimetr()
-        half_p = self._p/2
-        self._s = math.sqrt(half_p * (half_p- self._a) * (half_p - self._b) * (half_p - self._c))
+    def get_square(self):
+        half_p = self.get_perimeter() / 2
+        self._s = math.sqrt(half_p * (half_p - self._a) * (half_p - self._b) * (half_p - self._c))
+        return self._s
 
-    def __perimetr(self):
+    def get_perimeter(self):
         self._p = self._a + self._b + self._c
+        return self._p
 
 class Circle(Figure):
     def __init__(self, r: float):
@@ -89,10 +87,18 @@ class Circle(Figure):
         self._r = r
 
     def get_parameters(self):
-        return (self._r)
+        return self._r
 
-    def __square(self):
+    def get_square(self):
         self.s = math.pi * (self._r ** 2)
+        return self._s
 
-    def __perimetr(self):
+    def get_perimeter(self):
         self.p = 2 * self._r * math.pi
+        return self._p
+
+
+if __name__ == '__main__':
+    t1 = Triangle(2, 3, 4)
+    print(t1.get_perimeter(),
+          t1.get_square())

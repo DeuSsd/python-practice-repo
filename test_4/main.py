@@ -12,6 +12,7 @@
 Сравнение размера стипендии с другим студентом/аспирантом (больше или меньше)
 """
 
+
 class Person:
     def __init__(self, fio: str, age: int):
         self._fio: str = fio
@@ -36,7 +37,7 @@ class Student(Person):
         assert 2. <= average_mark <= 5., "Values expect be in range [2..5]"
         self._average_mark = average_mark
 
-    def _count_stipned(self):
+    def _count_stipend(self):
         if self._average_mark == 5.:
             self._stipend = self.STUDENT_STIPEND_5
         elif self._average_mark >= 4.:
@@ -45,19 +46,20 @@ class Student(Person):
             self._stipend = self.STUDENT_STIPEND_3
 
     def get_stipend(self):
-        self._count_stipned()
+        self._count_stipend()
         return self._stipend
 
     def stipend_lt(self, other):
         return self.get_stipend() < other.get_stipend()
 
     def stipend_gt(self, other):
-        self._count_stipned()
+        self._count_stipend()
         return self.get_stipend() > other.get_stipend()
 
     def stipend_eq(self, other):
-        self._count_stipned()
+        self._count_stipend()
         return self.get_stipend() == other.get_stipend()
+
 
 class Postgraduate(Student):
     STUDENT_STIPEND_5 = 8000
