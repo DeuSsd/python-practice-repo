@@ -1,5 +1,5 @@
 import unittest
-from main import check_palindeom
+from main import is_palindrome
 
 class MyTestCase(unittest.TestCase):
     def test_line_is_palindrome(self):
@@ -15,10 +15,10 @@ class MyTestCase(unittest.TestCase):
         ]
 
         for line in palindrome_list:
-            self.assertTrue(check_palindeom(line))
+            self.assertTrue(is_palindrome(line))
 
         for line in not_palindrome_list:
-            self.assertFalse(check_palindeom(line))
+            self.assertFalse(is_palindrome(line))
 
 
 if __name__ == '__main__':
