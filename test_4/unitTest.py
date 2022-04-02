@@ -7,19 +7,19 @@ class MyTestCase(unittest.TestCase):
         s1 = Student(*s1_data)
         self.assertEqual(s1.get_info(),s1_data)
         s1.set_average_mark(5)
-        self.assertEqual(s1.get_stipend(), s1.STUDENT_STIPEND_5)
+        self.assertEqual(s1.get_stipend(), s1.STUDENT_STIPEND_EXCELLENT)
 
         s2_data = ("Петрович Илья Александрович", 25)
         s2 = Postgraduate(*s2_data)
         self.assertEqual(s2.get_info(), s2_data)
         s2.set_average_mark(5)
-        self.assertEqual(s2.get_stipend(), s2.STUDENT_STIPEND_5)
+        self.assertEqual(s2.get_stipend(), s2.STUDENT_STIPEND_EXCELLENT)
 
         s3_data = ("Плотников Андрей Васильевич", 17)
         s3 = Student(*s3_data)
         self.assertEqual(s3.get_info(), s3_data)
         s3.set_average_mark(3)
-        self.assertEqual(s3.get_stipend(), s3.STUDENT_STIPEND_3)
+        self.assertEqual(s3.get_stipend(), s3.STUDENT_STIPEND)
 
         self.assertFalse(s3.stipend_gt(s2))
         self.assertFalse(s2.stipend_eq(s1))
