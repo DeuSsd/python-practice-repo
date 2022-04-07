@@ -23,9 +23,12 @@ class Person:
 
 
 class Student(Person):
-    STUDENT_STIPEND_5 = 6000
-    STUDENT_STIPEND_4 = 4000
-    STUDENT_STIPEND_3 = 0
+    MARK_EXCELLENT = 5.
+    MARK_GOOD = 4.
+    MARK_BAD = 2.
+    STUDENT_STIPEND_EXCELLENT = 6000
+    STUDENT_STIPEND_GOOD = 4000
+    STUDENT_STIPEND = 0
 
     def __init__(self, fio: str, age: int):
         super().__init__(fio, age)
@@ -34,16 +37,16 @@ class Student(Person):
         self._stipend: float = 0
 
     def set_average_mark(self, average_mark: float):
-        assert 2. <= average_mark <= 5., "Values expect be in range [2..5]"
+        assert self.MARK_BAD <= average_mark <= self.MARK_EXCELLENT, f"Values expect be in range [{int(self.MARK_BAD)}..{int(self.MARK_EXCELLENT)}]"
         self._average_mark = average_mark
 
     def _count_stipend(self):
-        if self._average_mark == 5.:
-            self._stipend = self.STUDENT_STIPEND_5
-        elif self._average_mark >= 4.:
-            self._stipend = self.STUDENT_STIPEND_4
+        if self._average_mark == self.MARK_EXCELLENT:
+            self._stipend = self.STUDENT_STIPEND_EXCELLENT
+        elif self._average_mark >= self.MARK_GOOD:
+            self._stipend = self.STUDENT_STIPEND_GOOD
         else:
-            self._stipend = self.STUDENT_STIPEND_3
+            self._stipend = self.STUDENT_STIPEND
 
     def get_stipend(self):
         self._count_stipend()
@@ -62,9 +65,9 @@ class Student(Person):
 
 
 class Postgraduate(Student):
-    STUDENT_STIPEND_5 = 8000
-    STUDENT_STIPEND_4 = 6000
-    STUDENT_STIPEND_3 = 0
+    STUDENT_STIPEND_EXCELLENT = 8000
+    STUDENT_STIPEND_GOOD = 6000
+    STUDENT_STIPEND = 0
 
     def __init__(self, fio: str, age: int):
         super().__init__(fio, age)

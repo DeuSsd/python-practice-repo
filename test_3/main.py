@@ -30,10 +30,10 @@ class Figure(ABC):
         pass
 
     def square_lt(self, other):
-        return self._s < other._s
+        return self._s < other.get_square()
 
     def perimeter_lt(self, other):
-        return self._p < other._p
+        return self._p < other.get_perimeter()
 
 
 class Rectangle(Figure):
@@ -47,12 +47,13 @@ class Rectangle(Figure):
         return self._w, self._h
 
     def get_square(self):
-        self.s = self._w * self._h
+        self._s = self._w * self._h
         return self._s
 
     def get_perimeter(self):
         self._p = 2 * (self._w + self._h)
         return self._p
+
 
 class Square(Rectangle):
     def __init__(self, a: float):
@@ -80,6 +81,7 @@ class Triangle(Figure):
         self._p = self._a + self._b + self._c
         return self._p
 
+
 class Circle(Figure):
     def __init__(self, r: float):
         super().__init__()
@@ -90,11 +92,11 @@ class Circle(Figure):
         return self._r
 
     def get_square(self):
-        self.s = math.pi * (self._r ** 2)
+        self._s = math.pi * (self._r ** 2)
         return self._s
 
     def get_perimeter(self):
-        self.p = 2 * self._r * math.pi
+        self._p = 2 * self._r * math.pi
         return self._p
 
 
